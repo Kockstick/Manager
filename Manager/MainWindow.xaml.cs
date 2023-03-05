@@ -23,6 +23,7 @@ namespace Manager
         public MainWindow()
         {
             InitializeComponent();
+            //
         }
     }
 }
