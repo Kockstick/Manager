@@ -14,14 +14,29 @@ using System.Windows.Shapes;
 
 namespace Manager
 {
-    /// <summary>
-    /// Логика взаимодействия для LeftPanel.xaml
-    /// </summary>
     public partial class LeftPanel : Canvas
     {
+        private ButtonPanel _pressedButton;
+        public ButtonPanel pressedButton
+        {
+            get
+            {
+                return _pressedButton;
+            }
+            set
+            {
+                if (_pressedButton != null)
+                    _pressedButton.UnPress();
+                    
+                _pressedButton = value;
+            }
+        }
         public LeftPanel()
         {
             InitializeComponent();
+            BtnPasswords.parent = this;
+            BtnNotes.parent = this;
+            BtnReminds.parent = this;
         }
     }
 }

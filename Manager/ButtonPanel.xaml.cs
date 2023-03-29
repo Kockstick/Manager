@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -19,27 +20,63 @@ namespace Manager
     /// </summary>
     public partial class ButtonPanel : Canvas
     {
+        public static readonly DependencyProperty BtnNameProperty = DependencyProperty.Register("BtnName", 
+            typeof(string), typeof(ButtonPanel), new PropertyMetadata("Default"));
+
+        public string BtnName
+        {
+            get
+            {
+                return (string)GetValue(BtnNameProperty);
+            }
+            set
+            {
+                SetValue(BtnNameProperty, value);
+            }
+        }
+
+        public LeftPanel parent { get; set; }
+
         public ButtonPanel()
         {
             InitializeComponent();
         }
 
-        private void Thumb_MouseEnter(object sender, MouseEventArgs e) =>
-            Mark(BgRect);
+        private bool isAnim = true;
 
-        private void Thumb_MouseLeave(object sender, MouseEventArgs e) =>
-            UnMark(BgRect);
-
-        private void Mark(Rectangle rect)
+        private void Thumb_MouseEnter(object sender, MouseEventArgs e)
         {
-            Color color = (Color)ColorConverter.ConvertFromString("#252525");
-            rect.Fill = new SolidColorBrush(color);
+            if (!isAnim)
+                return;
+
+            Storyboard sb = (Storyboard)ButtonBorder.FindResource("ButtonEnterAnimation");
+            sb.Begin();
         }
 
-        private void UnMark(Rectangle rect)
+        private void Thumb_MouseLeave(object sender, MouseEventArgs e)
         {
-            Color color = (Color)ColorConverter.ConvertFromString("#2B2B2B");
-            rect.Fill = new SolidColorBrush(color);
+            if (!isAnim)
+                return;
+
+            Storyboard sb = (Storyboard)ButtonBorder.FindResource("ButtonLeavAnimation");
+            sb.Begin();
+        }
+
+        private void Thumb_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!isAnim)
+                return;
+            isAnim = false;
+            parent.pressedButton = this;
+            Storyboard sb = (Storyboard)ButtonBorder.FindResource("ButtonClickAnimation");
+            sb.Begin();
+        }
+
+        public void UnPress()
+        {
+            Storyboard sb = (Storyboard)ButtonBorder.FindResource("ButtonUnClickAnimation");
+            sb.Begin();
+            isAnim = true;
         }
     }
 }

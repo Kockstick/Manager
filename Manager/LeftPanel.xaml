@@ -30,36 +30,18 @@
             Width="140"/>
 
         <local:ButtonPanel
-            Grid.Row="1"/>
+            x:Name="BtnPasswords"
+            Grid.Row="1"
+            BtnName="Passwords"/>
 
-        <Border
+        <local:ButtonPanel
+            x:Name="BtnNotes"
             Grid.Row="2"
-            Background="#2B2B2B">
+            BtnName="Notes"/>
 
-            <Label
-                Content="Notes"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Center"
-                Foreground="AliceBlue"
-                FontSize="20"
-                FontWeight="ExtraBold"/>
-        </Border>
-
-        <Border
+        <local:ButtonPanel
+            x:Name="BtnReminds"
             Grid.Row="3"
-            Background="#2B2B2B">
-
-            <Label
-                Content="Reminds"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Center"
-                Foreground="AliceBlue"
-                FontSize="20"
-                FontWeight="ExtraBold"/>
-        </Border>
+            BtnName="Reminds"/>
     </Grid>
 </Canvas>

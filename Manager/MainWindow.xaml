@@ -34,7 +34,12 @@
         </Border.Effect>
 
         <Grid>
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="210"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <local:LeftPanel/>
         </Grid>
     </Border>
 </Window>
